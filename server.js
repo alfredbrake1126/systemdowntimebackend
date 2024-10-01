@@ -31,7 +31,7 @@ db.connect((err) => {
 });
 
 // Serve the static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
+// app.use(express.static(path.join(__dirname, 'client/build')));
 
 // API route to receive form data and insert into the database
 app.post('/api/save-data', (req, res) => {
@@ -57,9 +57,9 @@ app.post('/api/save-data', (req, res) => {
 });
 
 // The "catchall" handler: for any request that doesn't match one above, send back the React app.
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+// });
 
 const PORT = process.env.PORT || 5000;
 
