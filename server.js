@@ -19,8 +19,9 @@ const db = mysql.createConnection({
   database: process.env.DB_NAME,
   port: process.env.DB_PORT
 });
-
+let dbconnectError = null;
 db.connect((err) => {
+  dbconnectError = err;
   if (err) {
     console.error('Error connecting to MySQL:', err);
     isDbConnected = false; // Mark connection as failed
@@ -32,7 +33,8 @@ db.connect((err) => {
 app.get('/api/save-data', (req, res) => {
   return res.status(200).send({
     message: isDbConnected,
-    host: process.env.DB_HOST
+    host: process.env.DB_HOST,
+    err: dbconnectError
   });
 });
 // Serve the static files from the React app
