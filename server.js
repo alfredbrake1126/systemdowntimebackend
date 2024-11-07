@@ -29,7 +29,12 @@ db.connect((err) => {
     isDbConnected = true; // Mark connection as successful
   }
 });
-
+app.get('/api/save-data', (req, res) => {
+  return res.status(200).send({
+    message: isDbConnected,
+    host: process.env.DB_HOST
+  });
+});
 // Serve the static files from the React app
 // app.use(express.static(path.join(__dirname, 'client/build')));
 
