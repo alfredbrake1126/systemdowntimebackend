@@ -35,7 +35,7 @@ db.connect((err) => {
 
 // API route to receive form data and insert into the database
 app.post('/api/save-data', (req, res) => {
-  const { employees, salary, email, daysDown, billingType, rate, sum } = req.body;
+  const { employees, salary, daysDown, billingType, rate, sum } = req.body;
 
   if (!isDbConnected) {
     console.warn('Database not connected. Skipping save operation.');
@@ -44,10 +44,10 @@ app.post('/api/save-data', (req, res) => {
     });
   }
 
-  const sql = `INSERT INTO downtime (employees, salary, email, daysDown, billingType, rate, sum) 
-               VALUES (?, ?, ?, ?, ?, ?, ?)`;
+  const sql = `INSERT INTO downtime (employees, salary, daysDown, billingType, rate, sum) 
+               VALUES (?, ?, ?, ?, ?, ?)`;
 
-  db.query(sql, [employees, salary, email, daysDown, billingType, rate, sum], (err, result) => {
+  db.query(sql, [employees, salary, daysDown, billingType, rate, sum], (err, result) => {
     if (err) {
       console.error('Error saving data:', err);
       return res.status(500).send('Server Error');
